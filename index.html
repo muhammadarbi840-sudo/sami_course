@@ -39,7 +39,7 @@
   /* ---------- Load-in transition: quick 3D logo spin ---------- */
   .loader{
     position:fixed; inset:0; z-index:999;
-    background:radial-gradient(circle at center, #232323, #141414 70%);
+    background:#ffffff;
     display:flex; align-items:center; justify-content:center;
     transition:opacity .35s ease, visibility .35s ease;
   }
@@ -61,7 +61,7 @@
   .coin-face{
     position:absolute; inset:0; width:100%; height:100%;
     border-radius:50%; backface-visibility:hidden;
-    box-shadow:0 18px 40px -14px rgba(0,0,0,0.6);
+    box-shadow:0 18px 40px -16px rgba(11,19,48,0.35);
   }
   .coin-face img{ width:100%; height:100%; display:block; border-radius:50%; }
   .coin-back{ transform:rotateY(180deg); }
@@ -164,6 +164,12 @@
   /* ---------- Section shell: consistent, minimal ---------- */
   section{ padding:52px 0; border-top:1px solid var(--line); }
   .eyebrow-sm{ font-size:11.5px; font-weight:800; color:var(--royal); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px; }
+  .eyebrow-line{
+    display:flex; align-items:center; gap:10px;
+    font-size:11.5px; font-weight:800; color:var(--royal); letter-spacing:0.1em; text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .eyebrow-line::before{ content:''; width:26px; height:1px; background:var(--royal); flex-shrink:0; }
   h2.display{ font-size:24px; color:var(--ink); margin-bottom:10px; }
   .lead{ color:var(--ink-dim); font-size:14.5px; line-height:1.65; margin-bottom:26px; }
 
@@ -231,60 +237,64 @@
   footer .brand{ font-family:'Archivo Black', sans-serif; font-size:13px; color:var(--ink-dim); margin-bottom:12px; }
   footer .fine{ font-size:11px; color:var(--ink-dimmer); line-height:1.75; }
 
+  /* ---------- App-style scroll progress + section rail ---------- */
+  .scroll-progress{
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:var(--royal); z-index:60; transition:width .1s linear;
+  }
+  .rail{
+    display:none; flex-direction:column; gap:14px;
+    position:fixed; left:28px; top:50%; transform:translateY(-50%); z-index:40;
+  }
+  .rail button{
+    width:8px; height:8px; border-radius:50%; border:none; padding:0; cursor:pointer;
+    background:var(--line); transition:background .2s ease, transform .2s ease;
+  }
+  .rail button.active{ background:var(--royal); transform:scale(1.35); }
+
   /* small desktop nicety — content stays narrow/mobile-shaped, just centered with breathing room */
   @media (min-width: 640px){
     .hero{ padding-top:64px; }
     section{ padding:64px 0; }
   }
 
-  /* ---------- Desktop (900px+): same simple language, wider canvas ---------- */
+  /* ---------- Desktop (900px+): SAME single-track flow as mobile — just given more room to breathe ---------- */
   @media (min-width: 900px){
-    .col{ max-width:960px; }
+    .col{ max-width:640px; }
 
-    /* hero becomes two columns: copy left, video right — video gets the larger share since it's the main sell */
-    .hero{
-      display:grid;
-      grid-template-columns:0.9fr 1.25fr;
-      align-items:center;
-      gap:48px;
-      text-align:left;
-      padding-top:80px;
-      padding-bottom:80px;
-      max-width:1120px;
-    }
-    .hero-copy{ max-width:420px; }
-    .hero .eyebrow{ margin-left:0; }
-    .hero h1{ font-size:clamp(32px, 3vw, 42px); }
-    .hero p{ font-size:16px; }
-    .cta-btn{ display:inline-block; width:auto; padding:16px 34px; }
-    .cta-note{ text-align:left; }
-    .video-shell{ margin-top:0; }
-    .play-btn{ width:72px; height:72px; }
-    .play-btn svg{ width:26px; height:26px; }
-    .video-time{ font-size:12px; }
+    .hero{ padding-top:96px; padding-bottom:56px; }
+    .hero h1{ font-size:clamp(38px, 4.2vw, 50px); }
+    .hero p{ font-size:17px; max-width:480px; margin-left:auto; margin-right:auto; }
+    .video-shell{ max-width:560px; margin-left:auto; margin-right:auto; margin-top:32px; }
+    .play-btn{ width:68px; height:68px; }
+    .play-btn svg{ width:24px; height:24px; }
 
-    /* on desktop the video sits beside the copy, not below it — swap the down-arrow for a sideways one */
-    .down-pointer{ display:none; }
-    .side-pointer{ display:flex; }
+    section{ padding:88px 0; }
+    .eyebrow-line{ justify-content:center; }
+    .eyebrow-line::before{ display:none; }
+    h2.display{ font-size:30px; text-align:center; }
+    .lead{ text-align:center; max-width:460px; margin-left:auto; margin-right:auto; }
 
-    /* two-up rows instead of one long stack — halves scroll length without adding decoration */
-    .plain-list{ display:grid; grid-template-columns:1fr 1fr; column-gap:40px; }
-    .plain-item:nth-child(1), .plain-item:nth-child(2){ border-top:none; }
+    .plain-item, .phase-item{ padding:22px 0; }
+    .plain-item h4, .phase-item h4{ font-size:16.5px; }
+    .plain-item p, .phase-item p{ font-size:14.5px; max-width:460px; }
+    .phase-num{ width:38px; height:38px; font-size:14px; }
 
-    .phase-grid{ display:grid; grid-template-columns:1fr 1fr; column-gap:40px; }
-    .phase-item:nth-child(1), .phase-item:nth-child(2){ border-top:none; }
+    .optin-copy{ text-align:center; }
+    .optin-card, .optin-form-card{ max-width:440px; margin:0 auto; }
+    .optin-notice, .seats-row{ }
 
-    .optin-inner{ display:grid; grid-template-columns:1fr 0.85fr; gap:56px; align-items:start; }
-    .optin-copy p.lead{ margin-bottom:0; }
-    .optin-form-card{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:28px; }
-    .optin-form-card .cta-btn{ display:block; width:100%; }
+    .t-item{ padding:24px 0; }
+    .t-item p{ font-size:14.5px; max-width:480px; margin-left:auto; margin-right:auto; }
+    .t-person{ justify-content:center; }
 
-    .t-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; column-gap:28px; }
-    .t-item{ border-top:none; padding-top:0; }
+    .final-inner{ flex-direction:column; text-align:center; gap:20px; }
+    .final h2{ font-size:26px; }
 
-    .final-inner{ display:flex; align-items:center; justify-content:space-between; text-align:left; gap:32px; }
-    .final .cta-btn{ margin-top:0; flex-shrink:0; }
+    /* app-style section indicator, desktop only — quiet, not decorative for its own sake */
+    .rail{ display:flex; }
   }
+
 </style>
 </head>
 <body>
@@ -299,26 +309,28 @@
     </div>
   </div>
 
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <nav class="rail" id="rail">
+    <button data-target="top" class="active" aria-label="Hero"></button>
+    <button data-target="optin" aria-label="Reserve seat"></button>
+    <button data-target="testimonials" aria-label="Testimonials"></button>
+    <button data-target="final" aria-label="Closing"></button>
+  </nav>
+
   <div class="topbar">LIVE MASTERCLASS · STARTS IN <span class="mono" id="navCountdown">02:14:09</span></div>
 
-  <header class="col hero">
-    <div class="hero-copy">
-      <span class="eyebrow reveal reveal-1">Free 60-Minute Training</span>
-      <h1 class="display reveal reveal-1">Stop guessing. <span class="hl">Start with the framework</span> that works.</h1>
-      <p class="reveal reveal-2">One live session, no pitch deck, no fluff — just the framework, walked through start to finish so you can see exactly how it works.</p>
+  <header class="col hero" id="top">
+    <span class="eyebrow reveal reveal-1">Free 60-Minute Training</span>
+    <h1 class="display reveal reveal-1">Stop guessing. <span class="hl">Start with the framework</span> that works.</h1>
+    <p class="reveal reveal-2">One hour. No pitch deck. Just the framework, in order, so you can see exactly how it works before you decide anything.</p>
 
-      <a href="#optin" class="reveal reveal-2"><button class="cta-btn">Save My Free Seat</button></a>
-      <p class="cta-note reveal reveal-3">4,281 registered · Tue, Aug 11 · 7PM CST</p>
+    <a href="#optin" class="reveal reveal-2"><button class="cta-btn">Save My Free Seat</button></a>
+    <p class="cta-note reveal reveal-3" id="heroMeta">4,281 registered · Tue, Aug 11 · 7PM CST</p>
 
-      <div class="down-pointer reveal reveal-3">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 4v14M6 12l6 6 6-6"/></svg>
-        Watch how it works
-      </div>
-
-      <div class="side-pointer reveal reveal-3">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12h16M13 6l6 6-6 6"/></svg>
-        Watch how it works
-      </div>
+    <div class="down-pointer reveal reveal-3">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 4v14M6 12l6 6 6-6"/></svg>
+      Watch how it works
     </div>
 
     <div class="video-shell reveal reveal-3">
@@ -336,21 +348,21 @@
 
   <section>
     <div class="col">
-      <div class="eyebrow-sm">Sound familiar?</div>
-      <h2 class="display">You've done the research. You're still stuck.</h2>
-      <p class="lead">You've bookmarked the articles, watched the videos, maybe even bought a course. The information isn't the problem — knowing what order to use it in is.</p>
+      <div class="eyebrow-line">Here's the straight problem</div>
+      <h2 class="display">You have the information. You still haven't started.</h2>
+      <p class="lead">That's not on you. Nobody's ever told you what order to use it in.</p>
       <div class="plain-list">
         <div class="plain-item">
           <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6 6 18M6 6l12 12"/></svg></div>
-          <div><h4>Too much conflicting advice</h4><p>Every source seems to contradict the last one, so you end up more cautious than when you started.</p></div>
+          <div><h4>Every source contradicts the last one</h4><p>So you wait. Waiting feels safe. It isn't — it's just slower than getting it wrong.</p></div>
         </div>
         <div class="plain-item">
           <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6 6 18M6 6l12 12"/></svg></div>
-          <div><h4>No clear first step</h4><p>You know the destination, but nobody's laid out what to actually do on day one.</p></div>
+          <div><h4>Nobody gave you a day one</h4><p>You know where this ends. Nobody's told you where it starts.</p></div>
         </div>
         <div class="plain-item">
           <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6 6 18M6 6l12 12"/></svg></div>
-          <div><h4>Worried it's too late to start</h4><p>It feels like everyone else got in early. They didn't — most started exactly where you are now.</p></div>
+          <div><h4>You think you missed the window</h4><p>You didn't. Most people in this room started exactly where you are right now.</p></div>
         </div>
       </div>
     </div>
@@ -358,25 +370,25 @@
 
   <section>
     <div class="col">
-      <div class="eyebrow-sm">What we'll cover</div>
-      <h2 class="display">Four phases, one live hour</h2>
-      <p class="lead">Each phase builds on the last.</p>
+      <div class="eyebrow-line">What actually happens on the call</div>
+      <h2 class="display">Four phases. One hour. No filler.</h2>
+      <p class="lead">This is the whole sequence, in order.</p>
       <div class="phase-grid">
         <div class="phase-item">
           <div class="phase-num mono">01</div>
-          <div><h4>Lay the foundation</h4><p>The handful of decisions that make everything after this easier, not harder.</p></div>
+          <div><h4>Lay the foundation</h4><p>The decisions that make everything after this easier instead of harder. Skip this and the rest doesn't hold.</p></div>
         </div>
         <div class="phase-item">
           <div class="phase-num mono">02</div>
-          <div><h4>Find the right opportunity</h4><p>What to actually look for, and the red flags that save you months of wasted effort.</p></div>
+          <div><h4>Find the right opportunity</h4><p>What to look for. What to walk away from. This step alone saves most people months.</p></div>
         </div>
         <div class="phase-item">
           <div class="phase-num mono">03</div>
-          <div><h4>Run the numbers</h4><p>A simple gut-check you can do in five minutes before committing to anything.</p></div>
+          <div><h4>Run the numbers</h4><p>A five-minute gut-check, before you commit to anything. Not after.</p></div>
         </div>
         <div class="phase-item">
           <div class="phase-num mono">04</div>
-          <div><h4>Execute with confidence</h4><p>The exact sequence to follow once you've decided to move forward.</p></div>
+          <div><h4>Execute with confidence</h4><p>The exact sequence. No guesswork once you're through the door.</p></div>
         </div>
       </div>
     </div>
@@ -385,9 +397,9 @@
   <section class="optin-section" id="optin">
     <div class="col optin-inner">
       <div class="optin-copy">
-        <div class="eyebrow-sm">Reserve your seat</div>
-        <h2 class="display">Enter your details below</h2>
-        <p class="lead">We'll only use them to send reminders about this training.</p>
+        <div class="eyebrow-line">Reserve your seat</div>
+        <h2 class="display">Show up. That's the whole ask.</h2>
+        <p class="lead">No pitch at the end. Enter your info, we send the link, you show up.</p>
       </div>
 
       <div class="optin-form-card">
@@ -406,34 +418,34 @@
     </div>
   </section>
 
-  <section>
+  <section id="testimonials">
     <div class="col">
-      <div class="eyebrow-sm">From past attendees</div>
-      <h2 class="display">Don't take our word for it</h2>
+      <div class="eyebrow-line">From past attendees</div>
+      <h2 class="display">Don't take our word for it.</h2>
       <div class="t-grid">
         <div class="t-item">
           <div class="stars">★★★★★</div>
-          <p>"I'd sat through webinars like this before and always felt like it was building to a pitch. This one actually stuck to the framework — I took four pages of notes."</p>
+          <p>"I expected the usual build-up to a pitch. Didn't happen. Stuck to the framework, four pages of notes, done."</p>
           <div class="t-person"><div class="t-avatar">MK</div><div><div class="t-name">Maria K.</div><div class="t-role">Small business owner</div></div></div>
         </div>
         <div class="t-item">
           <div class="stars">★★★★★</div>
-          <p>"The phase-by-phase breakdown finally made the order of operations click for me. I'd been jumping around for months without a clear sequence."</p>
+          <p>"The order finally clicked. I'd had all the pieces for months. Nobody had told me what came first."</p>
           <div class="t-person"><div class="t-avatar">DT</div><div><div class="t-name">David T.</div><div class="t-role">Career changer</div></div></div>
         </div>
         <div class="t-item">
           <div class="stars">★★★★★</div>
-          <p>"Worth clearing my schedule for. Blunt, specific, and no filler — exactly what I needed after wading through hours of vague YouTube advice."</p>
+          <p>"Blunt. Specific. No filler. Worth clearing my schedule for — most of these aren't."</p>
           <div class="t-person"><div class="t-avatar">RS</div><div><div class="t-name">Renee S.</div><div class="t-role">First-time attendee</div></div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="final">
+  <section class="final" id="final">
     <div class="col final-inner">
       <div>
-        <h2 class="display">Your seat is held for a few minutes only.</h2>
+        <h2 class="display">Your seat is held. Not for long.</h2>
         <p class="mono" id="finalCountdown">02:14:09</p>
       </div>
       <a href="#optin"><button class="cta-btn">Save My Free Seat</button></a>
@@ -448,16 +460,66 @@
   </footer>
 
 <script>
+  // app-style scroll progress bar
+  const progressBar = document.getElementById('scrollProgress');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+    if(progressBar) progressBar.style.width = scrolled + '%';
+  }
+  window.addEventListener('scroll', updateProgress);
+  updateProgress();
+
+  // section rail — highlights the dot for whichever section is in view, and scrolls on click
+  const railButtons = document.querySelectorAll('.rail button');
+  const railTargets = ['top','optin','testimonials','final'].map(id => document.getElementById(id)).filter(Boolean);
+  railButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const el = document.getElementById(btn.dataset.target);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+  if('IntersectionObserver' in window && railTargets.length){
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          railButtons.forEach(b => b.classList.toggle('active', b.dataset.target === entry.target.id));
+        }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    railTargets.forEach(el => obs.observe(el));
+  }
+
   // load-in transition: let the coin spin finish (~950ms), then reveal the page
   setTimeout(function(){
     document.getElementById('loader').classList.add('hide');
     document.body.classList.add('loaded');
   }, 950);
 
-  let seconds = 8049;
+  // always target the nearest upcoming 7PM — today if it hasn't happened yet, otherwise tomorrow.
+  // Keeps the countdown genuinely urgent (never more than ~24h out) instead of drifting up to a week ahead.
+  function getNextSessionDate(){
+    const now = new Date();
+    const target = new Date(now);
+    target.setHours(19, 0, 0, 0);
+    if(now >= target){ target.setDate(target.getDate() + 1); }
+    return target;
+  }
+  const sessionDate = getNextSessionDate();
+
+  // realistic registered count instead of a hardcoded 4-digit number — re-rolls each page load
+  const registeredCount = Math.floor(Math.random() * 280) + 180; // 180–459
+
+  const dateLabel = sessionDate.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
+  const heroMeta = document.getElementById('heroMeta');
+  if(heroMeta) heroMeta.textContent = `${registeredCount} registered · ${dateLabel} · 7PM CST`;
+
+  let seconds = Math.max(0, Math.floor((sessionDate - new Date()) / 1000));
   function tick(){
-    const h = Math.floor(seconds/3600), m = Math.floor((seconds%3600)/60), s = seconds%60;
-    const str = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    const d = Math.floor(seconds/86400);
+    const h = Math.floor((seconds%86400)/3600), m = Math.floor((seconds%3600)/60), s = seconds%60;
+    const hms = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    const str = d > 0 ? `${d}d ${hms}` : hms;
     document.getElementById('navCountdown').textContent = str;
     const fc = document.getElementById('finalCountdown'); if(fc) fc.textContent = str;
     if(seconds>0) seconds--;
