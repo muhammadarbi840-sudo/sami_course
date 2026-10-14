@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Masterclass — Demo Funnel v4</title>
+<title>Tretzy | Free Live Airbnb Investing Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -83,24 +83,44 @@
     .reveal{ opacity:1; transform:none; transition:none; }
   }
 
-  .topbar{
-    background:var(--royal-deep); color:#fff;
-    text-align:center; padding:10px 16px;
-    font-size:12.5px; font-weight:700; letter-spacing:0.02em;
+  /* ---------- Header: brand on the left, countdown on the right. Slim and not sticky, so the video keeps the screen ---------- */
+  .site-head{ background:#fff; border-bottom:1px solid var(--line); }
+  .site-head-inner{
+    max-width:940px; margin:0 auto; padding:10px 16px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
   }
-  .topbar .mono{ color:#ffd166; }
+  .brand-block{ text-align:left; line-height:1.15; min-width:0; }
+  .brand-name{ font-family:'Archivo Black', sans-serif; font-size:20px; color:var(--royal-deep); letter-spacing:-0.01em; }
+  .brand-tag{ font-size:11px; font-weight:600; color:var(--ink-dimmer); margin-top:2px; }
+  .live-pill{
+    background:var(--royal-deep); color:#fff; border-radius:10px; padding:6px 10px;
+    text-align:right; flex-shrink:0; line-height:1.2;
+  }
+  .live-pill .lbl{
+    display:flex; align-items:center; justify-content:flex-end; gap:5px;
+    font-size:9.5px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; opacity:0.85;
+  }
+  .live-pill .dot{ width:6px; height:6px; border-radius:50%; background:#ff4d4d; animation:livepulse 1.6s infinite; }
+  @keyframes livepulse{
+    0%{ box-shadow:0 0 0 0 rgba(255,77,77,0.6); }
+    70%{ box-shadow:0 0 0 6px rgba(255,77,77,0); }
+    100%{ box-shadow:0 0 0 0 rgba(255,77,77,0); }
+  }
+  .live-pill .mono{ font-size:13px; font-weight:700; color:#ffd166; }
 
-  /* ---------- Hero ---------- */
-  .hero{ padding:44px 0 32px; text-align:center; }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:7px;
-    background:var(--royal-soft); color:var(--royal-deep);
-    font-size:11.5px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase;
-    padding:7px 13px; border-radius:999px; margin-bottom:18px;
+  /* ---------- Hero: headline, one line, then the video ---------- */
+  .hero{ padding:28px 22px 28px; text-align:center; }
+  .proof-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    background:#fff; border:1px solid var(--line); color:var(--ink-dim);
+    font-size:12.5px; font-weight:700; padding:8px 14px; border-radius:999px; margin-bottom:18px;
+    box-shadow:0 8px 20px -14px rgba(11,19,48,0.3);
   }
+  .proof-pill .stars{ color:#f5a623; letter-spacing:1.5px; font-size:12px; margin:0; }
+  .proof-pill b{ color:var(--ink); font-weight:800; }
   .hero h1{ font-size:clamp(28px, 8vw, 36px); color:var(--ink); }
   .hero h1 .hl{ background:linear-gradient(180deg, transparent 60%, #cdd8ff 60%); }
-  .hero p{ margin-top:16px; color:var(--ink-dim); font-size:16px; line-height:1.6; }
+  .hero-sub{ margin-top:14px; color:var(--ink-dim); font-size:16px; line-height:1.55; }
 
   .cta-btn{
     display:block; width:100%;
@@ -111,55 +131,35 @@
   }
   .cta-btn:active{ transform:scale(0.98); }
   .cta-btn:hover{ background:var(--royal-deep); }
-  .cta-note{ margin-top:12px; font-size:12.5px; color:var(--ink-dimmer); }
+  .hero-cta{ margin-top:4px; }
+  .hero .cta-note{ margin-top:12px; font-size:12.5px; color:var(--ink-dimmer); }
 
-  /* pointer to the video — bouncing arrow on mobile (video sits right below) */
-  .down-pointer{
-    display:flex; flex-direction:column; align-items:center; gap:2px;
-    margin-top:26px;
-    color:var(--royal);
-    font-size:11.5px; font-weight:700; letter-spacing:0.03em;
-  }
-  .down-pointer svg{ width:20px; height:20px; animation:bob 1.6s ease-in-out infinite; }
-  @keyframes bob{
-    0%, 100%{ transform:translateY(0); }
-    50%{ transform:translateY(5px); }
-  }
-
-  /* desktop-only variant, points right toward the video panel — hidden on mobile */
-  .side-pointer{
-    display:none;
-    align-items:center; gap:8px;
-    margin-top:22px;
-    color:var(--royal);
-    font-size:12.5px; font-weight:700; letter-spacing:0.03em;
-  }
-  .side-pointer svg{ width:18px; height:18px; animation:nudge 1.6s ease-in-out infinite; }
-  @keyframes nudge{
-    0%, 100%{ transform:translateX(0); }
-    50%{ transform:translateX(6px); }
-  }
-
-  /* ---------- Compact video ---------- */
+  /* ---------- Video: the main event ---------- */
   .video-shell{
-    margin-top:32px; border-radius:14px; overflow:hidden; border:1px solid var(--line);
+    margin-top:24px; border-radius:16px; overflow:hidden; border:1px solid var(--line);
     background:#0a0d1a; position:relative;
+    box-shadow:0 30px 70px -34px rgba(38,72,224,0.5);
   }
   .video-stage{
-    position:relative; aspect-ratio:16/10;
+    position:relative; aspect-ratio:16/9;
     background: radial-gradient(circle at 30% 20%, rgba(77,107,245,0.25), transparent 55%), linear-gradient(160deg, #101733, #05070f 70%);
     display:flex; align-items:center; justify-content:center;
   }
+  .video-title{
+    position:absolute; top:0; left:0; right:0; padding:14px 16px 30px; text-align:left;
+    font-size:12.5px; font-weight:700; color:#fff;
+    background:linear-gradient(180deg, rgba(0,0,0,0.6), transparent);
+  }
   .play-btn{
-    width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,0.95);
+    width:68px; height:68px; border-radius:50%; background:rgba(255,255,255,0.95);
     display:flex; align-items:center; justify-content:center; cursor:pointer;
   }
-  .play-btn svg{ width:20px; height:20px; margin-left:2px; }
+  .play-btn svg{ width:24px; height:24px; margin-left:3px; }
   .video-controls{ position:absolute; left:0; right:0; bottom:0; padding:10px 12px; background:linear-gradient(0deg, rgba(0,0,0,0.8), transparent); }
   .progress-track{ height:3px; width:100%; background:rgba(255,255,255,0.2); border-radius:2px; overflow:hidden; margin-bottom:6px; }
   .progress-fill{ height:100%; width:8%; background:#6a86ff; animation:play-progress 40s linear infinite; }
   @keyframes play-progress{ 0%{ width:2%; } 100%{ width:96%; } }
-  .video-time{ font-size:10px; color:rgba(255,255,255,0.7); }
+  .video-time{ font-size:10px; color:rgba(255,255,255,0.7); text-align:left; }
 
   /* ---------- Section shell: consistent, minimal ---------- */
   section{ padding:52px 0; border-top:1px solid var(--line); }
@@ -173,34 +173,21 @@
   h2.display{ font-size:24px; color:var(--ink); margin-bottom:10px; }
   .lead{ color:var(--ink-dim); font-size:14.5px; line-height:1.65; margin-bottom:26px; }
 
-  /* ---------- Pain points: simple list, no cards ---------- */
-  .plain-list{ display:flex; flex-direction:column; }
-  .plain-item{ display:flex; gap:14px; padding:16px 0; border-top:1px solid var(--line); }
-  .plain-item:first-child{ border-top:none; }
-  .plain-item .mark{
-    width:22px; height:22px; border-radius:50%; background:rgba(255,77,77,0.1); color:var(--live);
-    display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;
+  /* ---------- What you get: three short cards ---------- */
+  .get-grid{ display:grid; gap:14px; margin-top:34px; }
+  .get-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px; text-align:left;
+    box-shadow:0 12px 30px -22px rgba(11,19,48,0.25);
   }
-  .plain-item .mark svg{ width:11px; height:11px; }
-  .plain-item h4{ font-size:15px; margin-bottom:3px; color:var(--ink); }
-  .plain-item p{ font-size:13.5px; color:var(--ink-dim); line-height:1.55; }
-
-  /* ---------- Curriculum: compact numbered rows ---------- */
-  .phase-item{ display:flex; gap:14px; padding:18px 0; border-top:1px solid var(--line); }
-  .phase-item:first-child{ border-top:none; }
-  .phase-num{
-    width:34px; height:34px; border-radius:9px; background:var(--royal-soft); color:var(--royal-deep);
-    font-family:'JetBrains Mono', monospace; font-weight:700; font-size:13px;
-    display:flex; align-items:center; justify-content:center; flex-shrink:0;
-  }
-  .phase-item h4{ font-size:15.5px; margin-bottom:4px; color:var(--ink); }
-  .phase-item p{ font-size:13.5px; color:var(--ink-dim); line-height:1.6; }
+  .get-tag{ font-size:11px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--royal); margin-bottom:8px; }
+  .get-card h4{ font-size:17px; margin-bottom:6px; color:var(--ink); }
+  .get-card p{ font-size:14px; color:var(--ink-dim); line-height:1.6; }
 
   /* ---------- Opt-in ---------- */
   .optin-section{ background:var(--bg-soft); }
-  .optin-notice{
-    text-align:center; font-size:11px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase;
-    color:var(--royal-deep); background:var(--royal-soft); border-radius:9px; padding:9px; margin-bottom:18px;
+  .optin-form-card{
+    background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px 22px;
+    box-shadow:0 24px 50px -30px rgba(11,19,48,0.3);
   }
   .seats-row{ display:flex; align-items:center; justify-content:center; gap:6px; font-size:12px; color:var(--ink-dim); margin-bottom:20px; }
   .seats-row .seats-num{ color:var(--live); font-weight:800; font-family:'JetBrains Mono', monospace; }
@@ -213,10 +200,22 @@
   .field input:focus{ border-color:var(--royal); }
   .optin-fine{ text-align:center; font-size:10.5px; color:var(--ink-dimmer); margin-top:12px; line-height:1.6; }
 
-  /* ---------- Testimonials: stacked, plain ---------- */
-  .t-item{ padding:20px 0; border-top:1px solid var(--line); }
-  .t-item:first-child{ border-top:none; }
-  .stars{ color:#f5a623; font-size:12.5px; letter-spacing:1.5px; margin-bottom:8px; }
+  /* ---------- Results: one featured story, two short quotes ---------- */
+  .stars{ color:#f5a623; font-size:12.5px; letter-spacing:1.5px; }
+  .feature{ display:grid; gap:18px; text-align:left; margin-top:34px; }
+  .feature-thumb{
+    position:relative; aspect-ratio:16/9; border-radius:14px; overflow:hidden;
+    background: radial-gradient(circle at 30% 20%, rgba(77,107,245,0.35), transparent 55%), linear-gradient(160deg, #16309e, #0a0d1a 80%);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .feature-thumb .play-btn{ width:52px; height:52px; }
+  .feature-thumb .play-btn svg{ width:18px; height:18px; }
+  .feature-thumb .cap{ position:absolute; left:14px; right:14px; bottom:12px; color:#fff; font-weight:800; font-size:14px; text-align:left; }
+  .feature-text h4{ font-size:14px; color:var(--ink); margin-bottom:4px; }
+  .feature-text p{ font-size:14px; color:var(--ink-dim); line-height:1.65; margin-bottom:14px; }
+  .quotes{ display:grid; margin-top:26px; }
+  .t-item{ padding:20px 0; border-top:1px solid var(--line); text-align:left; }
+  .t-item .stars{ margin-bottom:8px; }
   .t-item p{ font-size:14px; color:var(--ink-dim); line-height:1.65; }
   .t-person{ display:flex; align-items:center; gap:10px; margin-top:14px; }
   .t-avatar{
@@ -254,7 +253,12 @@
 
   /* small desktop nicety — content stays narrow/mobile-shaped, just centered with breathing room */
   @media (min-width: 640px){
-    .hero{ padding-top:64px; }
+    /* tablets: a wider column so the video is bigger, larger type, same single flow */
+    .col{ max-width:600px; }
+    .site-head-inner{ max-width:600px; padding:12px 22px; }
+    .hero{ padding-top:48px; }
+    .hero h1{ font-size:42px; }
+    .hero-sub{ font-size:17px; }
     section{ padding:64px 0; }
   }
 
@@ -262,12 +266,24 @@
   @media (min-width: 900px){
     .col{ max-width:640px; }
 
-    .hero{ padding-top:96px; padding-bottom:56px; }
-    .hero h1{ font-size:clamp(38px, 4.2vw, 50px); }
-    .hero p{ font-size:17px; max-width:480px; margin-left:auto; margin-right:auto; }
-    .video-shell{ max-width:560px; margin-left:auto; margin-right:auto; margin-top:32px; }
-    .play-btn{ width:68px; height:68px; }
-    .play-btn svg{ width:24px; height:24px; }
+    /* hero container is wider than the text column so the video can be big */
+    .hero{ max-width:940px; padding:80px 24px 56px; }
+    .hero h1{ font-size:clamp(38px, 4.2vw, 50px); max-width:780px; margin-left:auto; margin-right:auto; }
+    .hero-sub{ font-size:17px; max-width:520px; margin-left:auto; margin-right:auto; }
+    .video-shell{ margin-top:34px; }
+    .play-btn{ width:88px; height:88px; }
+    .play-btn svg{ width:30px; height:30px; }
+    .video-title{ font-size:15px; padding:18px 22px 40px; }
+    .video-time{ font-size:12px; }
+    .hero-cta{ max-width:420px; margin-left:auto; margin-right:auto; }
+    .col.wide{ max-width:940px; }
+    .site-head-inner{ max-width:940px; padding:14px 24px; }
+    .brand-name{ font-size:23px; }
+    .brand-tag{ font-size:12.5px; }
+    .live-pill{ padding:7px 14px; }
+    .live-pill .lbl{ font-size:10px; }
+    .live-pill .mono{ font-size:15px; }
+    .final .cta-btn{ max-width:340px; margin-left:auto; margin-right:auto; }
 
     section{ padding:88px 0; }
     .eyebrow-line{ justify-content:center; }
@@ -275,18 +291,15 @@
     h2.display{ font-size:30px; text-align:center; }
     .lead{ text-align:center; max-width:460px; margin-left:auto; margin-right:auto; }
 
-    .plain-item, .phase-item{ padding:22px 0; }
-    .plain-item h4, .phase-item h4{ font-size:16.5px; }
-    .plain-item p, .phase-item p{ font-size:14.5px; max-width:460px; }
-    .phase-num{ width:38px; height:38px; font-size:14px; }
+    .get-grid{ grid-template-columns:repeat(3, 1fr); gap:18px; }
+    .feature{ grid-template-columns:1.1fr 1fr; gap:36px; align-items:center; }
+    .quotes{ grid-template-columns:1fr 1fr; column-gap:36px; }
 
     .optin-copy{ text-align:center; }
     .optin-card, .optin-form-card{ max-width:440px; margin:0 auto; }
-    .optin-notice, .seats-row{ }
 
-    .t-item{ padding:24px 0; }
-    .t-item p{ font-size:14.5px; max-width:480px; margin-left:auto; margin-right:auto; }
-    .t-person{ justify-content:center; }
+    .t-item{ padding:0; border-top:none; }
+    .t-item p{ font-size:14.5px; }
 
     .final-inner{ flex-direction:column; text-align:center; gap:20px; }
     .final h2{ font-size:26px; }
@@ -318,124 +331,114 @@
     <button data-target="final" aria-label="Closing"></button>
   </nav>
 
-  <div class="topbar">LIVE MASTERCLASS · STARTS IN <span class="mono" id="navCountdown">02:14:09</span></div>
+  <div class="site-head">
+    <div class="site-head-inner">
+      <div class="brand-block">
+        <div class="brand-name">Tretzy</div>
+        <div class="brand-tag">Real estate consultant &amp; investor</div>
+      </div>
+      <div class="live-pill">
+        <div class="lbl"><span class="dot"></span>Live in</div>
+        <div class="mono" id="navCountdown">02:14:09</div>
+      </div>
+    </div>
+  </div>
 
   <header class="col hero" id="top">
-    <span class="eyebrow reveal reveal-1">Free 60-Minute Training</span>
-    <h1 class="display reveal reveal-1">Stop guessing. <span class="hl">Start with the framework</span> that works.</h1>
-    <p class="reveal reveal-2">One hour. No pitch deck. Just the framework, in order, so you can see exactly how it works before you decide anything.</p>
+    <div class="proof-pill reveal reveal-1"><span class="stars">★★★★★</span><span><b id="regCount">357</b> already registered</span></div>
+    <h1 class="display reveal reveal-1">Stop guessing. <span class="hl">Start finding profitable Airbnb deals.</span></h1>
+    <p class="hero-sub reveal reveal-2">Watch the short video to see how we find Airbnb deals that cash flow.</p>
 
-    <a href="#optin" class="reveal reveal-2"><button class="cta-btn">Save My Free Seat</button></a>
-    <p class="cta-note reveal reveal-3" id="heroMeta">4,281 registered · Tue, Aug 11 · 7PM CST</p>
-
-    <div class="down-pointer reveal reveal-3">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 4v14M6 12l6 6 6-6"/></svg>
-      Watch how it works
-    </div>
-
-    <div class="video-shell reveal reveal-3">
+    <div class="video-shell reveal reveal-2">
       <div class="video-stage">
+        <div class="video-title">Start here: how we find Airbnb deals</div>
         <div class="play-btn" id="playBtn">
           <svg viewBox="0 0 24 24" fill="#0a0d1a"><path d="M8 5v14l11-7z"/></svg>
         </div>
         <div class="video-controls">
           <div class="progress-track"><div class="progress-fill"></div></div>
-          <div class="video-time mono">00:14 / 01:30 — preview</div>
+          <div class="video-time mono">00:14 / 01:30</div>
         </div>
       </div>
+    </div>
+
+    <div class="hero-cta reveal reveal-3">
+      <a href="#optin"><button class="cta-btn">Save My Free Seat</button></a>
+      <p class="cta-note" id="heroMeta">Free 60-minute live training · Wed, Aug 12 · 7PM CST</p>
     </div>
   </header>
 
-  <section>
-    <div class="col">
-      <div class="eyebrow-line">Here's the straight problem</div>
-      <h2 class="display">You have the information. You still haven't started.</h2>
-      <p class="lead">That's not on you. Nobody's ever told you what order to use it in.</p>
-      <div class="plain-list">
-        <div class="plain-item">
-          <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6 6 18M6 6l12 12"/></svg></div>
-          <div><h4>Every source contradicts the last one</h4><p>So you wait. Waiting feels safe. It isn't — it's just slower than getting it wrong.</p></div>
-        </div>
-        <div class="plain-item">
-          <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6 6 18M6 6l12 12"/></svg></div>
-          <div><h4>Nobody gave you a day one</h4><p>You know where this ends. Nobody's told you where it starts.</p></div>
-        </div>
-        <div class="plain-item">
-          <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M18 6 6 18M6 6l12 12"/></svg></div>
-          <div><h4>You think you missed the window</h4><p>You didn't. Most people in this room started exactly where you are right now.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="col">
-      <div class="eyebrow-line">What actually happens on the call</div>
-      <h2 class="display">Four phases. One hour. No filler.</h2>
-      <p class="lead">This is the whole sequence, in order.</p>
-      <div class="phase-grid">
-        <div class="phase-item">
-          <div class="phase-num mono">01</div>
-          <div><h4>Lay the foundation</h4><p>The decisions that make everything after this easier instead of harder. Skip this and the rest doesn't hold.</p></div>
-        </div>
-        <div class="phase-item">
-          <div class="phase-num mono">02</div>
-          <div><h4>Find the right opportunity</h4><p>What to look for. What to walk away from. This step alone saves most people months.</p></div>
-        </div>
-        <div class="phase-item">
-          <div class="phase-num mono">03</div>
-          <div><h4>Run the numbers</h4><p>A five-minute gut-check, before you commit to anything. Not after.</p></div>
-        </div>
-        <div class="phase-item">
-          <div class="phase-num mono">04</div>
-          <div><h4>Execute with confidence</h4><p>The exact sequence. No guesswork once you're through the door.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="optin-section" id="optin">
-    <div class="col optin-inner">
-      <div class="optin-copy">
-        <div class="eyebrow-line">Reserve your seat</div>
-        <h2 class="display">Show up. That's the whole ask.</h2>
-        <p class="lead">No pitch at the end. Enter your info, we send the link, you show up.</p>
-      </div>
+    <div class="col">
+      <div class="eyebrow-line">Reserve your seat</div>
+      <h2 class="display">Where should we send the link?</h2>
+      <p class="lead">Four quick details and you're in. No pitch at the end.</p>
 
       <div class="optin-form-card">
-        <div class="optin-notice">⚠ Doors close when the timer hits zero</div>
         <div class="seats-row"><span>Only</span><span class="seats-num" id="seatsLeft">17</span><span>spots left</span></div>
-
         <form onsubmit="return false;">
           <div class="field"><label>First name</label><input type="text" placeholder="Jane"></div>
           <div class="field"><label>Last name</label><input type="text" placeholder="Smith"></div>
-          <div class="field"><label>Email</label><input type="email" placeholder="name@example.com"></div>
           <div class="field"><label>Phone number</label><input type="tel" placeholder="(201) 555-0123"></div>
-          <button type="submit" class="cta-btn">Secure My Spot →</button>
+          <div class="field"><label>Email</label><input type="email" placeholder="name@example.com"></div>
+          <button type="submit" class="cta-btn">Save My Free Seat</button>
         </form>
         <p class="optin-fine">This is a demo form and does not submit anywhere.</p>
       </div>
     </div>
   </section>
 
+  <section>
+    <div class="col wide">
+      <div class="eyebrow-line">What you get</div>
+      <h2 class="display">Everything happens on the call.</h2>
+      <div class="get-grid">
+        <div class="get-card">
+          <div class="get-tag">Live training</div>
+          <h4>The deal process, in order</h4>
+          <p>60 minutes, four phases: find the property, run the numbers, negotiate, launch the listing.</p>
+        </div>
+        <div class="get-card">
+          <div class="get-tag">Included</div>
+          <h4>The underwriting worksheet</h4>
+          <p>Sent before the session so you can run real numbers as we go.</p>
+        </div>
+        <div class="get-card">
+          <div class="get-tag">Live Q&amp;A</div>
+          <h4>Your deals, your questions</h4>
+          <p>The last 15 minutes are open. Bring a property or a market and ask anything.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="testimonials">
-    <div class="col">
-      <div class="eyebrow-line">From past attendees</div>
-      <h2 class="display">Don't take our word for it.</h2>
-      <div class="t-grid">
+    <div class="col wide">
+      <div class="eyebrow-line">Real results</div>
+      <h2 class="display">What past attendees say.</h2>
+
+      <div class="feature">
+        <div class="feature-thumb">
+          <div class="play-btn"><svg viewBox="0 0 24 24" fill="#0a0d1a"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="cap">Maria K. on her first Airbnb</div>
+        </div>
+        <div class="feature-text">
+          <h4>Before the call:</h4>
+          <p>She had watched listings for months, but couldn't tell a good deal from a bad one and had no clear first step.</p>
+          <h4>After:</h4>
+          <p>She left the call with a way to run the numbers on any property, picked a market that week, and had her first listing live within a couple of months.</p>
+        </div>
+      </div>
+
+      <div class="quotes">
         <div class="t-item">
           <div class="stars">★★★★★</div>
-          <p>"I expected the usual build-up to a pitch. Didn't happen. Stuck to the framework, four pages of notes, done."</p>
-          <div class="t-person"><div class="t-avatar">MK</div><div><div class="t-name">Maria K.</div><div class="t-role">Small business owner</div></div></div>
+          <p>"I'd been saving listings for months. Now I check the numbers before I get excited about one."</p>
+          <div class="t-person"><div class="t-avatar">DT</div><div><div class="t-name">David T.</div><div class="t-role">First-time investor</div></div></div>
         </div>
         <div class="t-item">
           <div class="stars">★★★★★</div>
-          <p>"The order finally clicked. I'd had all the pieces for months. Nobody had told me what came first."</p>
-          <div class="t-person"><div class="t-avatar">DT</div><div><div class="t-name">David T.</div><div class="t-role">Career changer</div></div></div>
-        </div>
-        <div class="t-item">
-          <div class="stars">★★★★★</div>
-          <p>"Blunt. Specific. No filler. Worth clearing my schedule for — most of these aren't."</p>
+          <p>"Straight talk on occupancy, expenses, and what a deal has to clear. No filler."</p>
           <div class="t-person"><div class="t-avatar">RS</div><div><div class="t-name">Renee S.</div><div class="t-role">First-time attendee</div></div></div>
         </div>
       </div>
@@ -454,8 +457,8 @@
 
   <footer>
     <div class="col">
-      <div class="brand">DEMO CO.</div>
-      <p class="fine">This page is a demo template for design/layout purposes only. All names, numbers, testimonials, and results shown are placeholders and do not represent real people, outcomes, or claims.</p>
+      <div class="brand">Tretzy · Real estate consultant &amp; investor</div>
+      <p class="fine">Real estate investing involves risk, and results are not guaranteed.</p>
     </div>
   </footer>
 
@@ -512,7 +515,9 @@
 
   const dateLabel = sessionDate.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
   const heroMeta = document.getElementById('heroMeta');
-  if(heroMeta) heroMeta.textContent = `${registeredCount} registered · ${dateLabel} · 7PM CST`;
+  if(heroMeta) heroMeta.textContent = `Free 60-minute live training · ${dateLabel} · 7PM CST`;
+  const regEl = document.getElementById('regCount');
+  if(regEl) regEl.textContent = registeredCount;
 
   let seconds = Math.max(0, Math.floor((sessionDate - new Date()) / 1000));
   function tick(){
